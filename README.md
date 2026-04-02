@@ -23,10 +23,16 @@ npm install
 npm run prisma:generate
 ```
 
-Run migrations against your Postgres instance:
+Synchronize the schema locally (no shadow DB):
 
 ```bash
-npm run prisma:migrate:dev
+npx prisma db push
+```
+
+For production deployments where migrations are committed, use:
+
+```bash
+npx prisma migrate deploy
 ```
 
 Seed example data:
