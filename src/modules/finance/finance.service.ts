@@ -33,8 +33,8 @@ export type OffsetPagination = { limit: number; offset: number };
 export type RecordListResult = {
   items: Array<{
     id: string;
-    amount: string; // Prisma Decimal returns string; controller/service will keep stable
-    type: string;
+    amount: any; // Prisma Decimal returns Decimal at runtime.
+    type: any;
     category: string;
     date: Date;
     notes: string | null;

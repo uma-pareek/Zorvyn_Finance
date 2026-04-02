@@ -39,27 +39,27 @@ export const userController = {
   }),
 
   changeRole: asyncHandler(async (req: Request, res: Response) => {
-    const userId = req.params.id;
+    const userId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const body = parseOrApiError(RoleChangeBodySchema, req.body);
     const updated = await updateUserRoleService(userId, body);
     return res.status(200).json(updated);
   }),
 
   changeStatus: asyncHandler(async (req: Request, res: Response) => {
-    const userId = req.params.id;
+    const userId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const body = parseOrApiError(StatusChangeBodySchema, req.body);
     const updated = await updateUserStatusService(userId, body);
     return res.status(200).json(updated);
   }),
 
   activate: asyncHandler(async (req: Request, res: Response) => {
-    const userId = req.params.id;
+    const userId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const updated = await updateUserStatusService(userId, { status: "ACTIVE" });
     return res.status(200).json(updated);
   }),
 
   deactivate: asyncHandler(async (req: Request, res: Response) => {
-    const userId = req.params.id;
+    const userId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const updated = await updateUserStatusService(userId, { status: "INACTIVE" });
     return res.status(200).json(updated);
   }),

@@ -95,7 +95,7 @@ export const financeController = {
   }),
 
   getById: asyncHandler(async (req: Request, res: Response) => {
-    const recordId = req.params.id;
+    const recordId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const userId = req.user!.id;
     const record = await getRecordByIdService(userId, recordId);
 
@@ -111,7 +111,7 @@ export const financeController = {
   }),
 
   update: asyncHandler(async (req: Request, res: Response) => {
-    const recordId = req.params.id;
+    const recordId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const body = parseOrApiError(UpdateRecordBodySchema, req.body);
     const userId = req.user!.id;
 
@@ -128,7 +128,7 @@ export const financeController = {
   }),
 
   remove: asyncHandler(async (req: Request, res: Response) => {
-    const recordId = req.params.id;
+    const recordId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const userId = req.user!.id;
     await deleteRecordService(userId, recordId);
     return res.status(204).send();
